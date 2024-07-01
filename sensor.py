@@ -6,7 +6,7 @@ from homeassistant.components.sensor.const import (SensorDeviceClass,
                                                    UnitOfPower,
                                                    UnitOfTemperature)
 
-from . import DOMAIN, NatureRemoBase
+from . import DOMAIN, NatureRemoBase, NatureRemoDeviceBase
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -78,17 +78,12 @@ class NatureRemoE(NatureRemoBase, SensorEntity):
         await self._coordinator.async_request_refresh()
 
 
-class NatureRemoTemperatureSensor(NatureRemoBase, SensorEntity):
+class NatureRemoTemperatureSensor(NatureRemoDeviceBase, SensorEntity):
     """Implementation of a Nature Remo sensor."""
 
     def __init__(self, coordinator, appliance):
         super().__init__(coordinator, appliance)
         self._name = self._name.strip() + " Temperature"
-
-    @property
-    def should_poll(self):
-        """Return the polling requirement of the entity."""
-        return True
 
     @property
     def unit_of_measurement(self):
@@ -107,17 +102,12 @@ class NatureRemoTemperatureSensor(NatureRemoBase, SensorEntity):
         return SensorDeviceClass.TEMPERATURE
 
 
-class NatureRemoHumiditySensor(NatureRemoBase, SensorEntity):
+class NatureRemoHumiditySensor(NatureRemoDeviceBase, SensorEntity):
     """Implementation of a Nature Remo sensor."""
 
     def __init__(self, coordinator, appliance):
         super().__init__(coordinator, appliance)
         self._name = self._name.strip() + " Humidity"
-
-    @property
-    def should_poll(self):
-        """Return the polling requirement of the entity."""
-        return True
 
     @property
     def state(self):
@@ -131,17 +121,12 @@ class NatureRemoHumiditySensor(NatureRemoBase, SensorEntity):
         return SensorDeviceClass.HUMIDITY
 
 
-class NatureRemoIlluminanceSensor(NatureRemoBase, SensorEntity):
+class NatureRemoIlluminanceSensor(NatureRemoDeviceBase, SensorEntity):
     """Implementation of a Nature Remo sensor."""
 
     def __init__(self, coordinator, appliance):
         super().__init__(coordinator, appliance)
         self._name = self._name.strip() + " Illuminance"
-
-    @property
-    def should_poll(self):
-        """Return the polling requirement of the entity."""
-        return True
 
     @property
     def unique_id(self):

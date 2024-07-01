@@ -11,7 +11,7 @@ from . import CONF_COOL_TEMP, CONF_HEAT_TEMP, DOMAIN, NatureRemoBase
 
 _LOGGER = logging.getLogger(__name__)
 
-SUPPORT_FLAGS = ClimateEntityFeature.TARGET_TEMPERATURE | ClimateEntityFeature.FAN_MODE | ClimateEntityFeature.SWING_MODE
+SUPPORT_FLAGS = ClimateEntityFeature.TARGET_TEMPERATURE | ClimateEntityFeature.FAN_MODE | ClimateEntityFeature.SWING_MODE | ClimateEntityFeature.TURN_ON | ClimateEntityFeature.TURN_OFF
 
 MODE_HA_TO_REMO = {
     HVACMode.AUTO: "auto",
@@ -52,6 +52,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 
 class NatureRemoAC(NatureRemoBase, ClimateEntity):
     """Implementation of a Nature Remo E sensor."""
+    _enable_turn_on_off_backwards_compatibility = False
 
     def __init__(self, coordinator, api, appliance, config):
         super().__init__(coordinator, appliance)
@@ -157,6 +158,19 @@ class NatureRemoAC(NatureRemoBase, ClimateEntity):
         return {
             "previous_target_temperature": self._last_target_temperature,
         }
+    
+    async def async_turn_off(self):
+        """Turn the entity off."""
+        await self._post({"button": MODE_HA_TO_REMO[HVACMode.OFF]})
+
+
+    async def async_turn_on(self):
+        """Turn the entity on."""
+        if self._remo_mode is None:
+            # if the mode is unknown, set to the default mode
+            await self.async_set_hvac_mode(HVACMode.COOL)
+        else:
+            await self.async_set_hvac_mode(MODE_REMO_TO_HA[self._remo_mode])
 
     async def async_set_temperature(self, **kwargs):
         """Set new target temperature."""

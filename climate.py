@@ -161,7 +161,7 @@ class NatureRemoAC(NatureRemoBase, ClimateEntity):
     
     async def async_turn_off(self):
         """Turn the entity off."""
-        await self._post({"button": MODE_HA_TO_REMO[HVACMode.OFF]})
+        await self.async_set_hvac_mode(HVACMode.OFF)
 
 
     async def async_turn_on(self):

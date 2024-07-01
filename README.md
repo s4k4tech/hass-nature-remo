@@ -4,11 +4,12 @@ Yet another [Home Assistant](https://www.home-assistant.io) component for [Natur
 
 ⚠️This integration is neither Nature Remo official nor Home Assistant official. **Use at your own risk.** ⚠️
 
-<img src="./assets/screenshot_1.png" width="600"><img src="./assets/screenshot_2.png" width="200">
+<img src="https://raw.githubusercontent.com/hannoeru/hass-nature-remo/main/assets/screenshot_1.png" width="600">
+<img src="https://raw.githubusercontent.com/hannoeru/hass-nature-remo/main/assets/screenshot_2.png" width="200">
 
 ## Supported features
 
-- [x] Air Conditionar
+- [x] Air Conditioner
   - [x] Set mode (e.g. cool, warm, blow etc.)
   - [x] Set temperature
   - [x] Set fan mode
@@ -20,12 +21,21 @@ Yet another [Home Assistant](https://www.home-assistant.io) component for [Natur
 - [ ] Switch
 - [ ] Light
 - [ ] TV
-- [ ] Others
-  - [ ] Fetch sensor data
+- [x] Others
+  - [x] Fetch sensor data
 
 Tested on Home Assistant Core 2021.3.3 on Docker
 
 ## Installation
+
+### Install via HACS Custom repositories
+
+https://hacs.xyz/docs/faq/custom_repositories
+
+Enter the following information in the dialog and click `Add` button.
+
+Repository: https://github.com/yutoyazaki/hass-nature-remo
+Category: Integrations
 
 ### Manual Install
 
@@ -56,7 +66,7 @@ git submodule add https://github.com/yutoyazaki/hass-nature-remo.git {path_to_cu
 
 1. Go to https://home.nature.global and sign in/up
 1. Generate access token
-1. Add following codes to your `configuration.yaml` file
+1. Add the following codes to your `configuration.yaml` file
 
 ```yaml
 nature_remo:

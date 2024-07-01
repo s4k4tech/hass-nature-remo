@@ -1,7 +1,9 @@
 """Support for Nature Remo E energy sensor."""
 import logging
 
-from homeassistant.const import DEVICE_CLASS_POWER, POWER_WATT
+from homeassistant.components.sensor import SensorEntity
+from homeassistant.components.sensor.const import (SensorDeviceClass,
+                                                   UnitOfPower)
 
 from . import DOMAIN, NatureRemoBase
 
@@ -24,12 +26,12 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     )
 
 
-class NatureRemoE(NatureRemoBase):
+class NatureRemoE(NatureRemoBase, SensorEntity):
     """Implementation of a Nature Remo E sensor."""
 
     def __init__(self, coordinator, appliance):
         super().__init__(coordinator, appliance)
-        self._unit_of_measurement = POWER_WATT
+        self._unit_of_measurement = UnitOfPower.WATT
 
     @property
     def state(self):
@@ -51,7 +53,7 @@ class NatureRemoE(NatureRemoBase):
     @property
     def device_class(self):
         """Return the device class."""
-        return DEVICE_CLASS_POWER
+        return SensorDeviceClass.POWER
 
     async def async_added_to_hass(self):
         """Subscribe to updates."""

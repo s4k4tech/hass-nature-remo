@@ -1,12 +1,8 @@
 """Support for Nature Remo E energy sensor."""
 import logging
 
-from homeassistant.const import (
-    CONF_ACCESS_TOKEN,
-    ENERGY_KILO_WATT_HOUR,
-    POWER_WATT,
-    DEVICE_CLASS_POWER,
-)
+from homeassistant.const import DEVICE_CLASS_POWER, POWER_WATT
+
 from . import DOMAIN, NatureRemoBase
 
 _LOGGER = logging.getLogger(__name__)

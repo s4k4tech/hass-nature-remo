@@ -25,6 +25,9 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
         if appliance["type"] == "EL_SMART_METER"
     ]
     for device in devices.values():
+        # skip devices that include in appliances
+        if device["id"] in [appliance["device"]["id"] for appliance in appliances.values()]:
+            continue
         for sensor in device["newest_events"].keys():
             if sensor == "te":
                 entities.append(NatureRemoTemperatureSensor(coordinator, device))

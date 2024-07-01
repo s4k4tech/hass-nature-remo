@@ -40,7 +40,7 @@ Category: Integrations
 ### Manual Install
 
 1. Download this repository
-1. Create `custom_components/nature_remo` folder at your config directory
+1. Create `custom_components/nature_remo` folder in your config directory
 1. Copy files into it (Just drag&drop whole files would be fine)
 
 ```

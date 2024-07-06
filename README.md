@@ -34,8 +34,8 @@ https://hacs.xyz/docs/faq/custom_repositories
 
 Enter the following information in the dialog and click `Add` button.
 
-Repository: https://github.com/yutoyazaki/hass-nature-remo
-Category: Integrations
+- Repository: https://github.com/hannoeru/hass-nature-remo
+- Category: Integrations
 
 ### Manual Install
 

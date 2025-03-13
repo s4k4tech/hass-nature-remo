@@ -238,7 +238,13 @@ class NatureRemoAC(NatureRemoBase, ClimateEntity):
         self._swing_mode = ac_settings["dir"] or None
 
         if device is not None:
-            self._current_temperature = float(device["newest_events"]["te"]["val"])
+            # Wrap temperature sensor data access with try-except
+            try:
+                if "newest_events" in device and "te" in device["newest_events"]:
+                    self._current_temperature = float(device["newest_events"]["te"]["val"])
+            except (KeyError, ValueError, TypeError):
+                # Skip temperature update if data is not available
+                _LOGGER.debug("Temperature data not available for device %s", self._device["id"])
 
     @callback
     def _update_callback(self):
